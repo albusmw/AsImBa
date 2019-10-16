@@ -1,0 +1,56 @@
+﻿'OLD CODE BELOW
+            If RunWithNewMethod Then
+
+                Dim Fixed(,) As Byte = GetFixed()
+                If OutputImage.ColorBytesPerPixel = 3 Then
+                    For Y As Integer = 0 To Height - 1
+                        Dim OffsetY As Integer = Y * OutputImage.BitmapData.Stride
+                        Dim OffsetX As Integer = 0
+                        For X As Integer = 0 To Width - 1
+                            Dim BaseOffset As Integer = OffsetY + OffsetX
+                            OutputImage.Pixels(BaseOffset) = Fixed(X, Y)
+                            OutputImage.Pixels(BaseOffset + 1) = Fixed(X, Y)
+                            OutputImage.Pixels(BaseOffset + 2) = Fixed(X, Y)
+                            OffsetX += OutputImage.ColorBytesPerPixel
+                        Next X
+                    Next Y
+                End If
+
+            Else
+
+                'Just convert the image data to byte and display values < 0 or > 255 as "invalid" (red)
+                Dim ByteLookUp(255) As Byte
+                For Idx As Integer = 0 To 255
+                    ByteLookUp(Idx) = CByte(Idx)
+                    'ByteLookUp(Idx) = CByte(((Math.Tan(Math.PI * ((Idx - 127.5) / 256))) + 163) * (255 / 326))          'TAN mapping
+                Next Idx
+                Dim Value As Double = 0
+                Dim ByteValue As Byte
+                If OutputImage.ColorBytesPerPixel = 3 Then
+                    For Y As Integer = 0 To Height - 1
+                        Dim OffsetY As Integer = Y * OutputImage.BitmapData.Stride
+                        Dim OffsetX As Integer = 0
+                        For X As Integer = 0 To Width - 1
+                            Dim BaseOffset As Integer = OffsetY + OffsetX
+                            Value = ImageData(X, Y)
+                            ' For 24 bpp set Red, Green and Blue to generate a grayscale image
+                            If Value >= 0 And Value <= 255 Then
+                                ByteValue = CByte(Value)
+                                OutputImage.Pixels(BaseOffset) = ByteLookUp(ByteValue)
+                                OutputImage.Pixels(BaseOffset + 1) = ByteLookUp(ByteValue)
+                                OutputImage.Pixels(BaseOffset + 2) = ByteLookUp(ByteValue)
+                            Else
+                                OutputImage.Pixels(BaseOffset) = Invalid_B
+                                OutputImage.Pixels(BaseOffset + 1) = Invalid_G
+                                OutputImage.Pixels(BaseOffset + 2) = Invalid_R
+                            End If
+                            OffsetX += OutputImage.ColorBytesPerPixel
+                        Next X
+                    Next Y
+                End If
+
+            End If
+
+            OutputImage.UnlockBits()
+
+            Return OutputImage

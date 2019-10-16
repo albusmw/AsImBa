@@ -1,0 +1,50 @@
+﻿'''<summary>Get an grayscale bitmap image from the given image data, using the A*X + B rule.</summary>
+    Public Function GetLockBitmap(ByVal OutMin As Byte, ByVal OutMax As Byte, ByVal ColorMap As cColorMaps.eMaps) As cLockBitmap
+
+        'Convert to 32-bit to use conversion to 8 bit and process faster
+        Dim ImageDataSingle(,) As Single = {}
+        DB.IPP.Convert(ImageData, ImageDataSingle)
+
+        'Map to the given MAX and MIN values
+        Dim OldMin As Single : Dim OldMax As Single
+        DB.IPP.MinMax(ImageDataSingle, OldMin, OldMax)
+        Dim DynOld As Single = OldMax - OldMin
+        Dim DynNew As Single = OutMax - OutMin
+        DB.IPP.SubC(ImageDataSingle, OldMin)
+        DB.IPP.MulC(ImageDataSingle, DynNew / DynOld)
+        DB.IPP.AddC(ImageDataSingle, CSng(OutMin))
+
+        'Generate output image
+        Dim OutputImage As New cLockBitmap(Width, Height)
+        OutputImage.LockBits()
+        Select Case ColorMap
+            Case cColorMaps.eMaps.None
+                For X As Integer = 0 To Width - 1
+                    For Y As Integer = 0 To Height - 1
+                        OutputImage.SetPixel(X, Y, ImageDataSingle(X, Y))
+                    Next Y
+                Next X
+            Case cColorMaps.eMaps.Jet
+                For X As Integer = 0 To Width - 1
+                    For Y As Integer = 0 To Height - 1
+                        OutputImage.SetPixel(X, Y, cColorMaps.Jet(ImageDataSingle(X, Y)))
+                    Next Y
+                Next X
+            Case cColorMaps.eMaps.Hot
+                For X As Integer = 0 To Width - 1
+                    For Y As Integer = 0 To Height - 1
+                        OutputImage.SetPixel(X, Y, cColorMaps.Hot(ImageDataSingle(X, Y)))
+                    Next Y
+                Next X
+            Case cColorMaps.eMaps.Bone
+                For X As Integer = 0 To Width - 1
+                    For Y As Integer = 0 To Height - 1
+                        OutputImage.SetPixel(X, Y, cColorMaps.Bone(ImageDataSingle(X, Y)))
+                    Next Y
+                Next X
+        End Select
+        OutputImage.UnlockBits()
+
+        Return OutputImage
+
+    End Function

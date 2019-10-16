@@ -1,0 +1,51 @@
+﻿'Public Sub LoadFITS_CShardFITS(ByVal FITSFileName As String)
+
+    '    ProcessingMessage(0, "Loading FITS file <" & FITSFileName & ">")
+
+    '    'Load passed FITS file
+    '    Fits = New nom.tam.fits.Fits(FITSFileName)
+    '    Dim MainHDU As nom.tam.fits.BasicHDU = Fits.GetHDU(0)
+    '    GetFITSInformation(MainHDU)
+
+    '    'Pass data matrix to the image data
+    '    Dim PixelFormat As Integer = CInt(MainHDU.Header.FindCard("BITPIX").Value)
+    '    'Dim Dim1 As Integer = CInt(MainHDU.Header.FindCard("NAXIS1").Value)
+    '    'Dim Dim2 As Integer = CInt(MainHDU.Header.FindCard("NAXIS2").Value)
+
+    '    'Process data according to the pixel format
+    '    ProcessingMessage(1, "PixelFormat is <" & PixelFormat.ToString.Trim & ">")
+    '    Select Case PixelFormat
+    '        Case 16
+    '            'Fixed-point 16 bit
+    '            Dim RawData As Array() = CType(MainHDU.Kernel, Array())
+    '            Dim Ptr As Integer = 0
+    '            For Dim2Idx As Integer = 0 To RawData.GetUpperBound(0)
+    '                Dim OneLine As Short() = CType(RawData(Dim2Idx), Short())
+    '                If Dim2Idx = 0 Then ReDim ImageData(OneLine.GetUpperBound(0), RawData.GetUpperBound(0))
+    '                For Dim1Idx As Integer = 0 To OneLine.GetUpperBound(0)
+    '                    ImageData(Dim1Idx, Dim2Idx) = OneLine(Dim1Idx)
+    '                    Ptr += 1
+    '                Next Dim1Idx
+    '            Next Dim2Idx
+    '        Case -32
+    '            'Single-precision
+    '            Dim KernelIn As Object = MainHDU.Kernel
+    '            Dim RawData As Array() = CType(KernelIn, Array())
+    '            Dim Ptr As Integer = 0
+    '            For Dim2Idx As Integer = 0 To RawData.GetUpperBound(0)
+    '                Dim OneLine As Single() = CType(RawData(Dim2Idx), Single())
+    '                If Dim2Idx = 0 Then ReDim ImageData(OneLine.GetUpperBound(0), RawData.GetUpperBound(0))
+    '                For Dim1Idx As Integer = 0 To OneLine.GetUpperBound(0)
+    '                    ImageData(Dim1Idx, Dim2Idx) = OneLine(Dim1Idx)
+    '                    Ptr += 1
+    '                Next Dim1Idx
+    '            Next Dim2Idx
+    '    End Select
+
+    '    SourceFileName = FITSFileName
+    '    SetOriginalStatistics()
+
+    '    Fits.Close()
+    '    ProcessingMessage(0, "Loading FITS file done.")
+
+    'End Sub
