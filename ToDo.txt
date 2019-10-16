@@ -1,0 +1,27 @@
+﻿- Sternerkennung:
+  1.) Hintergrund bestimmen (Histo-Peak)
+  2.) Globale Peaksuche
+  3.) Such-Rechteck vergrößern bis x % Hintergrund
+
+- Change 
+  Public Function GetLockBitmap() As cLockBitmap
+  and
+  Public Function GetLockBitmap(ByVal ColorMap As cColorMaps.eMaps) As cLockBitmap
+  to use 
+  1.) IPP double -> short conversion 
+  and then
+  2.) run look-up tables for grayscale and color map conversions
+  (standard short-based LUT's are generated at software start)
+
+- Mit der neuen Lookup-Methode bekommt man keine Invalid-Farben mehr zurück ...
+
+- Public Function GetLockBitmap() As cLockBitmap
+  Dim RunWithNewMethod As Boolean = True              <- geht nicht (LUT nit geladen?)
+
+
+
+
+  ============================================
+  - Bild in Kacheln mit (Breite/100) Kantenlänge unterteilen
+  - Pro Kachel testen ob das Maximum des Histogram nahe am Totalen Histogram-Maximum liegt
+  - Wenn ja: "In der Kachel ist nur Hintergrund mit Sternen" -> Histographischer Fill
