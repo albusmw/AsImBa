@@ -99,11 +99,11 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\Programmierung\atomics\cFITSReader.vb">
-      <Link>cFITSReader.vb</Link>
-    </Compile>
     <Compile Include="..\src\atomics\cColorMaps.vb">
       <Link>cColorMaps.vb</Link>
+    </Compile>
+    <Compile Include="..\src\atomics\cFITSReader.vb">
+      <Link>cFITSReader.vb</Link>
     </Compile>
     <Compile Include="..\src\atomics\cIntelIPP.vb">
       <Link>cIntelIPP.vb</Link>
@@ -215,11 +215,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\3rd Party\Everything64.dll">
+    <Content Include="..\src\bin\Everything64.dll">
       <Link>Everything64.dll</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="dcraw-9.26-ms-64-bit.exe">
+    <Content Include="..\src\bin\dcraw-9.26-ms-64-bit.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Icon.ico" />
@@ -227,6 +227,12 @@
     <Content Include="Not used code\GetLockBitmap_GrayScale.txt" />
     <Content Include="Not used code\LoadFITS_CShardFITS.txt" />
     <Content Include="ToDo.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\src\GUIElements\GUIElements.vbproj">
+      <Project>{15a7d929-5289-4550-a395-998989c1defa}</Project>
+      <Name>GUIElements</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
