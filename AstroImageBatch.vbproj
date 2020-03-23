@@ -99,17 +99,39 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\Programmierung\atomics\cFITSReader.vb">
-      <Link>cFITSReader.vb</Link>
-    </Compile>
     <Compile Include="..\..\Programmierung\atomics\Statistics.vb">
       <Link>Statistics.vb</Link>
     </Compile>
-    <Compile Include="..\3rd Party\Everything.vb">
-      <Link>Everything.vb</Link>
-    </Compile>
     <Compile Include="..\src\atomics\cColorMaps.vb">
       <Link>cColorMaps.vb</Link>
+    </Compile>
+    <Compile Include="..\src\atomics\cFITSReader.vb">
+      <Link>cFITSReader.vb</Link>
+    </Compile>
+    <Compile Include="..\src\atomics\cIntelIPP.vb">
+      <Link>cIntelIPP.vb</Link>
+    </Compile>
+    <Compile Include="..\src\atomics\cLockBitmap.vb">
+      <Link>cLockBitmap.vb</Link>
+    </Compile>
+    <Compile Include="..\src\atomics\cLogging.vb">
+      <Link>cLogging.vb</Link>
+    </Compile>
+    <Compile Include="..\src\atomics\cMIDIMonitor.vb">
+      <Link>cMIDIMonitor.vb</Link>
+    </Compile>
+    <Compile Include="..\src\atomics\cStopper.vb">
+      <Link>cStopper.vb</Link>
+    </Compile>
+    <Compile Include="..\src\atomics\Everything.vb">
+      <Link>Everything.vb</Link>
+    </Compile>
+    <Compile Include="..\src\GUIElements\cRTFGeneration.vb">
+      <Link>cRTFGeneration.vb</Link>
+    </Compile>
+    <Compile Include="..\src\GUIElements\PictureBoxEx.vb">
+      <Link>PictureBoxEx.vb</Link>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Analysis Functions\cHistData.vb" />
     <Compile Include="Analysis Functions\ImageAnalysis.vb" />
@@ -119,7 +141,6 @@
     <Compile Include="Analysis Functions\StarRemover.vb" />
     <Compile Include="cImageMonochrome.vb" />
     <Compile Include="cImageStat.vb" />
-    <Compile Include="cLockBitmap.vb" />
     <Compile Include="CodeSnip.vb" />
     <Compile Include="Configuration.vb" />
     <Compile Include="DB.vb" />
@@ -145,9 +166,7 @@
     </Compile>
     <Compile Include="Helpers\Functions.vb" />
     <Compile Include="Helpers\IPPStarter.vb" />
-    <Compile Include="Helpers\cLogging.vb" />
     <None Include="Not used code\IntelIPP.vb" />
-    <Compile Include="IntelIPP\cIntelIPP.vb" />
     <Compile Include="MainForm.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -155,7 +174,6 @@
       <DependentUpon>MainForm.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="cMIDIMonitor.vb" />
     <Compile Include="MathEx.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -205,12 +223,6 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\GUIElements\GUIElements.vbproj">
-      <Project>{15a7d929-5289-4550-a395-998989c1defa}</Project>
-      <Name>GUIElements</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\3rd Party\Everything64.dll">
