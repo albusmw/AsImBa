@@ -4,6 +4,11 @@ Option Strict On
 '''<summary>Processor for monochromatic images.</summary>
 Public Class cImageMonochrome
 
+    '''<summary>Instance of Intel IPP library call.</summary>
+    Private IPP As cIntelIPP = Nothing
+
+    Private Stopper As New cStopper
+
     Public Enum eBayerChannel
         Gray
         Green0
@@ -42,7 +47,7 @@ Public Class cImageMonochrome
     Public ImageData(,) As Double
 
     '''<summary>Histographic data.</summary>
-    Public HistCalc As New cStatistics
+    Public HistCalc As AstroNET.Statistics
 
     '''<summary>Width [pixel] in left-right dimension.</summary>
     Public ReadOnly Property Width() As Integer
@@ -64,8 +69,9 @@ Public Class cImageMonochrome
     ' Constructor using only width and hight
     '================================================================================
 
-    Public Sub New()
+    Public Sub New(ByVal IPPPath As String)
         ReDim ImageData(0, 0)
+        IPP = New cIntelIPP(IPPPath)
     End Sub
 
     Public Sub New(ByVal Width As Integer, ByVal Height As Integer)
@@ -214,7 +220,7 @@ Public Class cImageMonochrome
 
         Dim File As New IO.FileStream(FileName, IO.FileMode.Open, IO.FileAccess.Read)
         Dim Header As New IO.BinaryReader(File)
-        Dim Whitespaces() As Byte = {&H20, &H9, &HD, &HA}
+        Dim Whitespaces As New List(Of Byte)({&H20, &H9, &HD, &HA})
 
         Dim ASCIIMode As Boolean = False
         Dim BitPerValue As Integer = 0
@@ -371,7 +377,7 @@ Public Class cImageMonochrome
 
     End Sub
 
-    
+
 
     '================================================================================
     ' Init with defined color
@@ -408,11 +414,11 @@ Public Class cImageMonochrome
         'Calculate y = a*x + b in double precision to scale data to full short range for conversion
         Dim A As Double : Dim B As Double
         Dim ScaledDouble(,) As Double = ExpandAndCopy(Short.MinValue, Short.MaxValue, A, B)
-        Dim Orig_Min As Double : Dim Orig_Max As Double : DB.IPP.MinMax(ImageData, Orig_Min, Orig_Max)
+        Dim Orig_Min As Double : Dim Orig_Max As Double : IPP.MinMax(ImageData, Orig_Min, Orig_Max)
 
         'Convert the data to 16-bit fixed point
         Dim RetVal_short(,) As Short = {}
-        DB.IPP.Convert(ScaledDouble, RetVal_short, cIntelIPP.IppRoundMode.ippRndNear, 0)
+        IPP.Convert(ScaledDouble, RetVal_short, cIntelIPP.IppRoundMode.ippRndNear, 0)
 
         'Create LUT
         Dim LUT(65535) As Byte
@@ -460,20 +466,20 @@ Public Class cImageMonochrome
         Dim LinScale As Double = 255 / (HistCalc.Maximum - HistCalc.Minimum)
 
         'Build a LUT for all colors present in the picture
-        DB.Log.Tic("Generating LUT for each pixel value in the image ...")
+        Stopper.Tic()
         Dim LUT As New Dictionary(Of Double, Color)
         For Each Entry As Double In HistCalc.Histogram.Keys
             Dim Scaled As Double = (Entry + LinOffset) * LinScale
             LUT.Add(Entry, cColorMaps.None(Scaled))
         Next Entry
-        DB.Log.Toc()
+        Stopper.Toc("Generating LUT for each pixel value in the image ...")
 
         'Create the image
-        DB.Log.Tic("Locking image ...")
+        Stopper.Tic()
         OutputImage.LockBits()
-        DB.Log.Toc()
+        Stopper.Toc("Locking image ...")
 
-        DB.Log.Tic("Applying LUT ...")
+        Stopper.Tic("Applying LUT ...")
         Dim Stride As Integer = OutputImage.BitmapData.Stride
         Dim BytePerPixel As Integer = OutputImage.ColorBytesPerPixel
         Dim YOffset As Integer = 0
@@ -488,13 +494,13 @@ Public Class cImageMonochrome
             Next X
             YOffset += Stride
         Next Y
-        DB.Log.Toc()
+        Stopper.Toc()
 
-            DB.Log.Tic("Unlocking image ...")
-            OutputImage.UnlockBits()
-            DB.Log.Toc()
+        Stopper.Tic("Unlocking image ...")
+        OutputImage.UnlockBits()
+        Stopper.Toc()
 
-            Return OutputImage
+        Return OutputImage
 
     End Function
 
@@ -503,7 +509,7 @@ Public Class cImageMonochrome
 
         Dim Coloring As Color
 
-        DB.Log.Tic("GetLockBitmap")
+        Stopper.Tic("GetLockBitmap")
 
         'Generate output image
         Dim OutputImage As New cLockBitmap(Width, Height)
@@ -566,7 +572,7 @@ Public Class cImageMonochrome
         End Select
         OutputImage.UnlockBits()
 
-        DB.Log.Toc()
+        Stopper.Toc()
 
         Return OutputImage
 
@@ -696,7 +702,7 @@ Public Class cImageMonochrome
     '''<param name="NewMax">New maximum (included).</param>
     Public Sub GetAB(ByVal NewMin As Double, ByVal NewMax As Double, ByRef A As Double, ByRef B As Double)
         Dim OldMin As Double : Dim OldMax As Double
-        DB.IPP.MinMax(ImageData, OldMin, OldMax)
+        IPP.MinMax(ImageData, OldMin, OldMax)
         'MathEx.MaxMinIgnoreNAN(ImageData, OldMin, OldMax)
         A = (NewMin - NewMax) / (OldMin - OldMax)
         B = NewMin - (A * OldMin)
@@ -714,13 +720,13 @@ Public Class cImageMonochrome
 
     '''<summary>Apply y=a*x+b..</summary>
     Public Sub ApplyAB(ByRef Data(,) As Double, ByRef A As Double, ByRef B As Double)
-        DB.IPP.MulC(Data, A)
-        DB.IPP.AddC(Data, B)
+        IPP.MulC(Data, A)
+        IPP.AddC(Data, B)
     End Sub
 
     '''<summary>Expand by y=a*x+b and return the new calculated matrix.</summary>
     Public Function ApplyABAndCopy(ByVal A As Double, ByVal B As Double) As Double(,)
-        Dim RetVal(,) As Double = DB.IPP.Copy(ImageData)
+        Dim RetVal(,) As Double = IPP.Copy(ImageData)
         ApplyAB(RetVal, A, B)
         Return RetVal
     End Function
@@ -729,9 +735,9 @@ Public Class cImageMonochrome
     '''<param name="NewMin">New minimum (included).</param>
     '''<param name="NewMax">New maximum (included).</param>
     Public Function ExpandAndCopy(ByRef NewMin As Double, ByRef NewMax As Double, ByRef A As Double, ByRef B As Double) As Double(,)
-        Dim RetVal(,) As Double = DB.IPP.Copy(ImageData)
+        Dim RetVal(,) As Double = IPP.Copy(ImageData)
         Dim OldMin As Double : Dim OldMax As Double
-        DB.IPP.MinMax(RetVal, OldMin, OldMax)
+        IPP.MinMax(RetVal, OldMin, OldMax)
         MathEx.MaxMinIgnoreNAN(ImageData, OldMin, OldMax)
         A = (NewMin - NewMax) / (OldMin - OldMax)
         B = NewMin - (A * OldMin)
@@ -746,10 +752,10 @@ Public Class cImageMonochrome
     '''<summary>Invert the data within the present range.</summary>
     Public Sub Invert()
         Dim OldMin As Double : Dim OldMax As Double
-        DB.IPP.MinMax(ImageData, OldMin, OldMax)
+        IPP.MinMax(ImageData, OldMin, OldMax)
         MathEx.MaxMinIgnoreNAN(ImageData, OldMin, OldMax)
-        DB.IPP.MulC(ImageData, -1)
-        DB.IPP.AddC(ImageData, OldMax + OldMin)
+        IPP.MulC(ImageData, -1)
+        IPP.AddC(ImageData, OldMax + OldMin)
     End Sub
 
     '================================================================================

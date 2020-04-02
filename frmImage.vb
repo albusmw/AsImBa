@@ -7,8 +7,8 @@ Public Class frmImage
     Private HistExpand_Max As Double = Double.NaN
 
     'This elements are self-coded and will not work in 64-bit from the toolbox ...
-    Private WithEvents pbMain As GUIElements.PictureBoxEx
-    Private WithEvents pbZoom As GUIElements.PictureBoxEx
+    Private WithEvents pbMain As PictureBoxEx
+    Private WithEvents pbZoom As PictureBoxEx
     Private WithEvents zedHisto As ZedGraph.ZedGraphControl
 
     '''<summary>Size of the zooming area - can be adjusted with the mouse wheel.</summary>
@@ -32,7 +32,7 @@ Public Class frmImage
     Public DisplayedChannel As String = String.Empty
 
     'RTF-specifics
-    Private RTFGen As New GUIElements.cRTFGenerator
+    Private RTFGen As New cRTFGenerator
     Private RTFHeaderColor As Color = Color.Red
 
     '''<summary>Load the displayed channel.</summary>
@@ -112,7 +112,7 @@ Public Class frmImage
 
         'Calculate the zoom area
         Dim X_left As Integer : Dim X_right As Integer : Dim Y_top As Integer : Dim Y_bottom As Integer
-        Dim RealCenter As Point = GUIElements.PictureBoxEx.CenterSizeToXY(Coordinates, ZoomSize, X_left, X_right, Y_top, Y_bottom)
+        Dim RealCenter As Point = PictureBoxEx.CenterSizeToXY(Coordinates, ZoomSize, X_left, X_right, Y_top, Y_bottom)
 
         'Adjust left-right
         If X_left > X_right Then
@@ -353,14 +353,14 @@ Public Class frmImage
     Private Sub frmImage_Load(sender As Object, e As EventArgs) Handles Me.Load
 
         'Load custom controls - main image (must be done due to 64-bit IDE limitation)
-        pbMain = New GUIElements.PictureBoxEx
+        pbMain = New PictureBoxEx
         scMain.Panel1.Controls.Add(pbMain)
         pbMain.Dock = DockStyle.Fill
         pbMain.InterpolationMode = Drawing2D.InterpolationMode.NearestNeighbor
         pbMain.SizeMode = PictureBoxSizeMode.Zoom
 
         'Load custom controls - zoom image (must be done due to 64-bit IDE limitation)
-        pbZoom = New GUIElements.PictureBoxEx
+        pbZoom = New PictureBoxEx
         scGraphics.Panel1.Controls.Add(pbZoom)
         pbZoom.Dock = DockStyle.Fill
         pbZoom.InterpolationMode = Drawing2D.InterpolationMode.NearestNeighbor

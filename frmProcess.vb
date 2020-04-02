@@ -3,18 +3,6 @@ Option Strict On
 
 Public Class frmProcess
 
-    Private Structure sCoordIntensity
-
-        Public X As Integer
-        Public Y As Integer
-        Public Intensity As Double
-
-        Public Shared Function Sorter(ByVal Element1 As sCoordIntensity, ByVal Element2 As sCoordIntensity) As Integer
-            Return Element1.Intensity.CompareTo(Element2.Intensity)
-        End Function
-
-    End Structure
-
     Private Sub frmProcess_Load(sender As Object, e As EventArgs) Handles Me.Load
 
         'List all channels
@@ -186,23 +174,7 @@ Public Class frmProcess
             Case 3
                 'Experimental - smear the complete intensity range over the complete range (0...255) currently
                 '  After that, each pixel has a different intensity and the historgram is a straight horizontal line
-                Dim ToSort As New List(Of sCoordIntensity)
-                For Idx1 As Integer = 0 To DB.Channels(ChannelToEdit).ImageData.GetUpperBound(0)
-                    For Idx2 As Integer = 0 To DB.Channels(ChannelToEdit).ImageData.GetUpperBound(1)
-                        Dim NewElement As sCoordIntensity
-                        NewElement.X = Idx1
-                        NewElement.Y = Idx2
-                        NewElement.Intensity = DB.Channels(ChannelToEdit).ImageData(Idx1, Idx2)
-                        ToSort.Add(NewElement)
-                    Next Idx2
-                Next Idx1
-                ToSort.Sort(AddressOf sCoordIntensity.Sorter)
-                Dim CurrentIntense As Double = 0
-                Dim IntenseStepping As Double = 255 / ToSort.Count
-                For Each Entry As sCoordIntensity In ToSort
-                    DB.Channels(ChannelToEdit).ImageData(Entry.X, Entry.Y) = CurrentIntense
-                    CurrentIntense += IntenseStepping
-                Next Entry
+                'Moved to ImageProcessing.vb
 
             Case 4
 

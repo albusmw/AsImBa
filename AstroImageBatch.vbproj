@@ -99,6 +99,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Compile Include="..\src\atomics\cColorMaps.vb">
       <Link>cColorMaps.vb</Link>
     </Compile>
@@ -122,6 +123,41 @@
     </Compile>
     <Compile Include="..\src\atomics\Statistics.vb">
       <Link>Statistics.vb</Link>
+=======
+    <Compile Include="..\..\Programmierung\atomics\Statistics.vb">
+      <Link>Statistics.vb</Link>
+    </Compile>
+    <Compile Include="..\src\atomics\cColorMaps.vb">
+      <Link>cColorMaps.vb</Link>
+>>>>>>> c16f30f27038c45d90f49ab38f5f87180c7a8abc
+    </Compile>
+    <Compile Include="..\src\atomics\cFITSReader.vb">
+      <Link>cFITSReader.vb</Link>
+    </Compile>
+    <Compile Include="..\src\atomics\cIntelIPP.vb">
+      <Link>cIntelIPP.vb</Link>
+    </Compile>
+    <Compile Include="..\src\atomics\cLockBitmap.vb">
+      <Link>cLockBitmap.vb</Link>
+    </Compile>
+    <Compile Include="..\src\atomics\cLogging.vb">
+      <Link>cLogging.vb</Link>
+    </Compile>
+    <Compile Include="..\src\atomics\cMIDIMonitor.vb">
+      <Link>cMIDIMonitor.vb</Link>
+    </Compile>
+    <Compile Include="..\src\atomics\cStopper.vb">
+      <Link>cStopper.vb</Link>
+    </Compile>
+    <Compile Include="..\src\atomics\Everything.vb">
+      <Link>Everything.vb</Link>
+    </Compile>
+    <Compile Include="..\src\GUIElements\cRTFGeneration.vb">
+      <Link>cRTFGeneration.vb</Link>
+    </Compile>
+    <Compile Include="..\src\GUIElements\PictureBoxEx.vb">
+      <Link>PictureBoxEx.vb</Link>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Analysis Functions\cHistData.vb" />
     <Compile Include="Analysis Functions\ImageAnalysis.vb" />
@@ -163,7 +199,6 @@
       <DependentUpon>MainForm.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="cMIDIMonitor.vb" />
     <Compile Include="MathEx.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -215,7 +250,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Content Include="..\src\bin\Everything64.dll">
+=======
+    <Content Include="..\3rd Party\Everything64.dll">
+>>>>>>> c16f30f27038c45d90f49ab38f5f87180c7a8abc
       <Link>Everything64.dll</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
