@@ -32,7 +32,7 @@ Public Class frmImage
     Public DisplayedChannel As String = String.Empty
 
     'RTF-specifics
-    Private RTFGen As New cRTFGenerator
+    Private RTFGen As New Atomic.cRTFGenerator
     Private RTFHeaderColor As Color = Color.Red
 
     '''<summary>Load the displayed channel.</summary>

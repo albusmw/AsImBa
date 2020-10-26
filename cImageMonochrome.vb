@@ -369,7 +369,7 @@ Public Class cImageMonochrome
         'MathEx.MaxMinIgnoreNAN(ImageData, MyOriginal_RangeMin, MyOriginal_RangeMax)
 
         'Calculate histogram
-        HistCalc.Calculate(ImageData)
+        HistCalc.ImageStatistics(ImageData)
 
         ProcessingMessage(1, "Load done, image is " & (ImageData.GetUpperBound(0) + 1).ToString.Trim & " x " & (ImageData.GetUpperBound(1) + 1).ToString.Trim & " pixel.")
         ProcessingMessage(2, "Range: " & HistCalc.Minimum.ToString.Trim & " ... " & HistCalc.Maximum.ToString.Trim)

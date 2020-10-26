@@ -32,8 +32,8 @@ Public Class cImageStat
 
     <Category("0.) Detailed view")>
     <DisplayName("b) Color map")> _
-    <Description("Color map to apply on the detailed view." & CrLf & "Keyboard shortcut: <M>")> _
-    <TypeConverter(GetType(ComponentModel.EnumDesciptionConverter))> _
+    <Description("Color map to apply on the detailed view." & CrLf & "Keyboard shortcut: <M>")>
+    <TypeConverter(GetType(ComponentModelEx.EnumDesciptionConverter))>
     Public Property ColorMap() As cColorMaps.eMaps
         Get
             Return MyColorMap

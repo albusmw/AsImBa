@@ -12,7 +12,8 @@
     <AssemblyName>AstroImageBatch</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup>
     <OptionExplicit>On</OptionExplicit>
@@ -99,9 +100,11 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <Compile Include="..\src\atomics\cColorMaps.vb">
       <Link>cColorMaps.vb</Link>
+    </Compile>
+    <Compile Include="..\src\atomics\cFITSHeaderParser.vb">
+      <Link>cFITSHeaderParser.vb</Link>
     </Compile>
     <Compile Include="..\src\atomics\cFITSReader.vb">
       <Link>cFITSReader.vb</Link>
@@ -112,8 +115,11 @@
     <Compile Include="..\src\atomics\cLockBitmap.vb">
       <Link>cLockBitmap.vb</Link>
     </Compile>
-    <Compile Include="..\src\atomics\cLogging.vb">
-      <Link>Helpers\cLogging.vb</Link>
+    <Compile Include="..\src\atomics\ComponentModelConverter.vb">
+      <Link>ComponentModelConverter.vb</Link>
+    </Compile>
+    <Compile Include="..\src\atomics\cRTFGeneration.vb">
+      <Link>cRTFGeneration.vb</Link>
     </Compile>
     <Compile Include="..\src\atomics\cStatistics.vb">
       <Link>Analysis Functions\cStatistics.vb</Link>
@@ -121,24 +127,11 @@
     <Compile Include="..\src\atomics\Everything.vb">
       <Link>Everything.vb</Link>
     </Compile>
+    <Compile Include="..\src\atomics\Extensions.vb">
+      <Link>Extensions.vb</Link>
+    </Compile>
     <Compile Include="..\src\atomics\Statistics.vb">
       <Link>Statistics.vb</Link>
-=======
-    <Compile Include="..\..\Programmierung\atomics\Statistics.vb">
-      <Link>Statistics.vb</Link>
-    </Compile>
-    <Compile Include="..\src\atomics\cColorMaps.vb">
-      <Link>cColorMaps.vb</Link>
->>>>>>> c16f30f27038c45d90f49ab38f5f87180c7a8abc
-    </Compile>
-    <Compile Include="..\src\atomics\cFITSReader.vb">
-      <Link>cFITSReader.vb</Link>
-    </Compile>
-    <Compile Include="..\src\atomics\cIntelIPP.vb">
-      <Link>cIntelIPP.vb</Link>
-    </Compile>
-    <Compile Include="..\src\atomics\cLockBitmap.vb">
-      <Link>cLockBitmap.vb</Link>
     </Compile>
     <Compile Include="..\src\atomics\cLogging.vb">
       <Link>cLogging.vb</Link>
@@ -148,12 +141,6 @@
     </Compile>
     <Compile Include="..\src\atomics\cStopper.vb">
       <Link>cStopper.vb</Link>
-    </Compile>
-    <Compile Include="..\src\atomics\Everything.vb">
-      <Link>Everything.vb</Link>
-    </Compile>
-    <Compile Include="..\src\GUIElements\cRTFGeneration.vb">
-      <Link>cRTFGeneration.vb</Link>
     </Compile>
     <Compile Include="..\src\GUIElements\PictureBoxEx.vb">
       <Link>PictureBoxEx.vb</Link>
@@ -169,7 +156,6 @@
     <Compile Include="CodeSnip.vb" />
     <Compile Include="Configuration.vb" />
     <Compile Include="DB.vb" />
-    <Compile Include="ComponentModelConverter.vb" />
     <Compile Include="ExperimentalCode.vb" />
     <Compile Include="frmImage.Designer.vb">
       <DependentUpon>frmImage.vb</DependentUpon>
@@ -204,6 +190,7 @@
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -250,11 +237,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <Content Include="..\src\bin\Everything64.dll">
-=======
-    <Content Include="..\3rd Party\Everything64.dll">
->>>>>>> c16f30f27038c45d90f49ab38f5f87180c7a8abc
       <Link>Everything64.dll</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
