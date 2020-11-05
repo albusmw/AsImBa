@@ -100,8 +100,14 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\src\atomics\AstroStatistics.vb">
+      <Link>AstroStatistics.vb</Link>
+    </Compile>
     <Compile Include="..\src\atomics\cColorMaps.vb">
       <Link>cColorMaps.vb</Link>
+    </Compile>
+    <Compile Include="..\src\atomics\cFITSHeaderKeywords.vb">
+      <Link>cFITSHeaderKeywords.vb</Link>
     </Compile>
     <Compile Include="..\src\atomics\cFITSHeaderParser.vb">
       <Link>cFITSHeaderParser.vb</Link>
