@@ -106,6 +106,9 @@
     <Compile Include="..\src\atomics\cColorMaps.vb">
       <Link>cColorMaps.vb</Link>
     </Compile>
+    <Compile Include="..\src\atomics\cDLLDynCall.vb">
+      <Link>atomics\cDLLDynCall.vb</Link>
+    </Compile>
     <Compile Include="..\src\atomics\cFITSHeaderKeywords.vb">
       <Link>cFITSHeaderKeywords.vb</Link>
     </Compile>
@@ -116,7 +119,7 @@
       <Link>cFITSReader.vb</Link>
     </Compile>
     <Compile Include="..\src\atomics\cIntelIPP.vb">
-      <Link>cIntelIPP.vb</Link>
+      <Link>atomics\cIntelIPP.vb</Link>
     </Compile>
     <Compile Include="..\src\atomics\cLockBitmap.vb">
       <Link>cLockBitmap.vb</Link>
@@ -129,6 +132,9 @@
     </Compile>
     <Compile Include="..\src\atomics\cStatistics.vb">
       <Link>Analysis Functions\cStatistics.vb</Link>
+    </Compile>
+    <Compile Include="..\src\atomics\cStatMultiThread.vb">
+      <Link>atomics\cStatMultiThread.vb</Link>
     </Compile>
     <Compile Include="..\src\atomics\Everything.vb">
       <Link>Everything.vb</Link>
