@@ -1,113 +1,94 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{352401DB-BE96-473D-B5F9-82B7BE53ECC0}</ProjectGuid>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <OutputType>WinExe</OutputType>
     <StartupObject>My.MyApplication</StartupObject>
     <RootNamespace>
     </RootNamespace>
-    <AssemblyName>AstroImageBatch</AssemblyName>
-    <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup>
-    <OptionExplicit>On</OptionExplicit>
-  </PropertyGroup>
-  <PropertyGroup>
-    <OptionCompare>Binary</OptionCompare>
-  </PropertyGroup>
-  <PropertyGroup>
-    <OptionStrict>Off</OptionStrict>
-  </PropertyGroup>
-  <PropertyGroup>
-    <OptionInfer>On</OptionInfer>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWindowsForms>true</UseWindowsForms>
+    <UseWPF>true</UseWPF>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <DebugSymbols>true</DebugSymbols>
-    <DefineDebug>true</DefineDebug>
-    <DefineTrace>true</DefineTrace>
     <OutputPath>bin\x64\Debug\</OutputPath>
     <DefineConstants>UseIPP9</DefineConstants>
     <DocumentationFile>AstroImageBatch.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
     <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>true</Prefer32Bit>
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <DefineTrace>true</DefineTrace>
     <OutputPath>bin\x64\Release\</OutputPath>
     <DocumentationFile>AstroImageBatch.xml</DocumentationFile>
-    <Optimize>true</Optimize>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
     <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>true</Prefer32Bit>
     <DefineConstants>UseIPP9</DefineConstants>
     <RemoveIntegerChecks>true</RemoveIntegerChecks>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
+    <AssemblyTitle>AstroImageBatch</AssemblyTitle>
+    <Company>Rohde &amp; Schwarz</Company>
+    <Product>AstroImageBatch</Product>
+    <Copyright>Copyright © Rohde &amp; Schwarz 2015</Copyright>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
-    <PlatformTarget>x86</PlatformTarget>
     <OutputPath>bin\x86\Debug\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
-    <PlatformTarget>x86</PlatformTarget>
     <OutputPath>bin\x86\Release\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PresentationCore" />
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xaml" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="WeifenLuo.WinFormsUI.Docking">
-      <HintPath>..\src\bin\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
-    </Reference>
-    <Reference Include="WindowsBase" />
-    <Reference Include="ZedGraph">
-      <HintPath>..\src\bin\ZedGraph.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Import Include="Microsoft.VisualBasic" />
-    <Import Include="System" />
-    <Import Include="System.Collections" />
-    <Import Include="System.Collections.Generic" />
-    <Import Include="System.Data" />
     <Import Include="System.Drawing" />
-    <Import Include="System.Diagnostics" />
     <Import Include="System.Windows.Forms" />
-    <Import Include="System.Linq" />
-    <Import Include="System.Xml.Linq" />
-    <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\src\atomics\AstroStatistics.vb">
-      <Link>AstroStatistics.vb</Link>
+    <Compile Include="..\MyLib\AstroStatistics.vb">
+      <Link>MyLib\AstroStatistics.vb</Link>
     </Compile>
-    <Compile Include="..\src\atomics\cColorMaps.vb">
-      <Link>cColorMaps.vb</Link>
+    <Compile Include="..\MyLib\cColorMaps.vb">
+      <Link>MyLib\cColorMaps.vb</Link>
     </Compile>
-    <Compile Include="..\src\atomics\cDLLDynCall.vb">
-      <Link>atomics\cDLLDynCall.vb</Link>
+    <Compile Include="..\MyLib\cDLLDynCall.vb">
+      <Link>MyLib\cDLLDynCall.vb</Link>
+    </Compile>
+    <Compile Include="..\MyLib\cFITSHeaderKeywords.vb">
+      <Link>MyLib\cFITSHeaderKeywords.vb</Link>
+    </Compile>
+    <Compile Include="..\MyLib\cIntelIPP.vb">
+      <Link>MyLib\cIntelIPP.vb</Link>
+    </Compile>
+    <Compile Include="..\MyLib\cLockBitmap.vb">
+      <Link>MyLib\cLockBitmap.vb</Link>
+    </Compile>
+    <Compile Include="..\MyLib\cLogging.vb">
+      <Link>MyLib\cLogging.vb</Link>
+    </Compile>
+    <Compile Include="..\MyLib\cMIDIMonitor.vb">
+      <Link>MyLib\cMIDIMonitor.vb</Link>
+    </Compile>
+    <Compile Include="..\MyLib\ComponentModelConverter.vb">
+      <Link>MyLib\ComponentModelConverter.vb</Link>
+    </Compile>
+    <Compile Include="..\MyLib\cRTFGen.vb">
+      <Link>MyLib\cRTFGen.vb</Link>
+    </Compile>
+    <Compile Include="..\MyLib\cStatMultiThread.vb">
+      <Link>MyLib\cStatMultiThread.vb</Link>
+    </Compile>
+    <Compile Include="..\MyLib\Everything.vb">
+      <Link>MyLib\Everything.vb</Link>
+    </Compile>
+    <Compile Include="..\MyLib\Extensions.vb">
+      <Link>MyLib\Extensions.vb</Link>
+    </Compile>
+    <Compile Include="..\MyLib\PictureBoxEx.vb">
+      <Link>MyLib\PictureBoxEx.vb</Link>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="..\src\atomics\cFITSHeaderKeywords.vb">
       <Link>cFITSHeaderKeywords.vb</Link>
@@ -118,135 +99,49 @@
     <Compile Include="..\src\atomics\cFITSReader.vb">
       <Link>cFITSReader.vb</Link>
     </Compile>
-    <Compile Include="..\src\atomics\cIntelIPP.vb">
-      <Link>atomics\cIntelIPP.vb</Link>
-    </Compile>
-    <Compile Include="..\src\atomics\cLockBitmap.vb">
-      <Link>cLockBitmap.vb</Link>
-    </Compile>
-    <Compile Include="..\src\atomics\ComponentModelConverter.vb">
-      <Link>ComponentModelConverter.vb</Link>
-    </Compile>
     <Compile Include="..\src\atomics\cRTFGeneration.vb">
       <Link>cRTFGeneration.vb</Link>
     </Compile>
     <Compile Include="..\src\atomics\cStatistics.vb">
       <Link>Analysis Functions\cStatistics.vb</Link>
     </Compile>
-    <Compile Include="..\src\atomics\cStatMultiThread.vb">
-      <Link>atomics\cStatMultiThread.vb</Link>
-    </Compile>
-    <Compile Include="..\src\atomics\Everything.vb">
-      <Link>Everything.vb</Link>
-    </Compile>
-    <Compile Include="..\src\atomics\Extensions.vb">
-      <Link>Extensions.vb</Link>
-    </Compile>
     <Compile Include="..\src\atomics\Statistics.vb">
       <Link>Statistics.vb</Link>
-    </Compile>
-    <Compile Include="..\src\atomics\cLogging.vb">
-      <Link>cLogging.vb</Link>
-    </Compile>
-    <Compile Include="..\src\atomics\cMIDIMonitor.vb">
-      <Link>cMIDIMonitor.vb</Link>
     </Compile>
     <Compile Include="..\src\atomics\cStopper.vb">
       <Link>cStopper.vb</Link>
     </Compile>
-    <Compile Include="..\src\GUIElements\PictureBoxEx.vb">
-      <Link>PictureBoxEx.vb</Link>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Analysis Functions\cHistData.vb" />
-    <Compile Include="Analysis Functions\ImageAnalysis.vb" />
-    <Compile Include="Analysis Functions\ImageManipulation.vb" />
-    <Compile Include="Analysis Functions\InImplementation.vb" />
-    <Compile Include="Analysis Functions\StarRemover.vb" />
-    <Compile Include="cImageMonochrome.vb" />
-    <Compile Include="cImageStat.vb" />
-    <Compile Include="CodeSnip.vb" />
-    <Compile Include="Configuration.vb" />
-    <Compile Include="DB.vb" />
-    <Compile Include="ExperimentalCode.vb" />
-    <Compile Include="frmImage.Designer.vb">
+    <Compile Update="frmImage.Designer.vb">
       <DependentUpon>frmImage.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmImage.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmHistogram.Designer.vb">
+    <Compile Update="frmHistogram.Designer.vb">
       <DependentUpon>frmHistogram.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmHistogram.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmProcess.Designer.vb">
+    <Compile Update="frmProcess.Designer.vb">
       <DependentUpon>frmProcess.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmProcess.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Helpers\Functions.vb" />
-    <Compile Include="Helpers\IPPStarter.vb" />
     <None Include="Not used code\IntelIPP.vb" />
-    <Compile Include="MainForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MainForm.Designer.vb">
-      <DependentUpon>MainForm.vb</DependentUpon>
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MathEx.vb" />
-    <Compile Include="My Project\AssemblyInfo.vb" />
-    <Compile Include="My Project\Application.Designer.vb">
+    <Compile Update="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="My Project\Resources.Designer.vb">
+    <Compile Update="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="My Project\Settings.Designer.vb">
+    <Compile Update="My Project\Settings.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="ZEDGraphUtil.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="frmImage.resx">
-      <DependentUpon>frmImage.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmHistogram.resx">
-      <DependentUpon>frmHistogram.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmProcess.resx">
-      <DependentUpon>frmProcess.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
-      <DependentUpon>MainForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="My Project\Resources.resx">
-      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
-      <CustomToolNamespace>My.Resources</CustomToolNamespace>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="My Project\Application.myapp">
+    <None Update="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
-    <None Include="My Project\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <CustomToolNamespace>My</CustomToolNamespace>
-      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
-    </None>
-    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\src\bin\Everything64.dll">
@@ -263,17 +158,15 @@
     <Content Include="ToDo.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\src\GUIElements\GUIElements.vbproj">
-      <Project>{15a7d929-5289-4550-a395-998989c1defa}</Project>
-      <Name>GUIElements</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\src\GUIElements\GUIElements.vbproj" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+  <ItemGroup>
+    <PackageReference Include="DockPanelSuite" Version="3.1.1" />
+    <PackageReference Include="RTFExporter" Version="1.1.4" />
+    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
+    <PackageReference Include="ZedGraph6" Version="6.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Not used code\IntelIPP.vb" />
+  </ItemGroup>
 </Project>
